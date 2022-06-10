@@ -53,10 +53,7 @@
 <body class="antialiased">
 <div class="relative flex  min-h-screen py-4 sm:pt-0">
     <div class="mx-auto sm:px-6 lg:px-8">
-        <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-            <img src="https://cdn-ss.akinon.net/static_omnishop/super424/assets/img/logo-black.svg" height="50" />
-        </div>
-
+        <a href="{{route('logout')}}">Çıkış</a>
         <div class="mt-8 bg-white overflow-hidden shadow sm:rounded-lg">
             <button onClick="javascript:fnExcelReport();">Export XLS</button>
             <table id="headerTable">
@@ -79,6 +76,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                @isset($raffles)
                     @foreach($raffles as $value)
                         <tr>
                             <td>{{$value->name}}</td>
@@ -97,6 +95,7 @@
                             <td>{{$value->raffle_end_date}}</td>
                         </tr>
                     @endforeach
+                @endisset
                 </tbody>
             </table>
         </div>

@@ -59,10 +59,6 @@
             @endif
 
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                    <img src="https://cdn-ss.akinon.net/static_omnishop/super424/assets/img/logo-black.svg" height="50" />
-                </div>
-
                 <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
                     <div class="grid grid-cols-1 md:grid-cols-2">
                         <div class="p-6">
@@ -80,13 +76,27 @@
                         </div>
 
                         <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
+                            @if (!Auth::check())
                             <div class="flex items-center">
-                                <div class="loginForm">
-                                    <input type="text" placeholder="Email"/>
-                                    <input type="password" placeholder="Password"/>
-                                    <button>Giriş</button>
-                                </div>
+
+                                <form class="loginForm" action="{{route('login')}}" method="POST">
+                                    @csrf
+                                    <input type="text" name="email" placeholder="Email"/>
+                                    <input type="password" name="password" placeholder="Password"/>
+                                    <button type="submit">Giriş</button>
+                                </form>
+
                             </div>
+                            @else
+                                <p>
+                                    <a style="color: #fff" href="{{route('dashboard')}}">Dashboard</a>
+                                </p>
+                                <p>
+                                    <a style="color: #fff" href="{{route('logout')}}">Çıkış</a>
+                                </p>
+
+
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -103,10 +113,6 @@
                                 Support
                             </a>
                         </div>
-                    </div>
-
-                    <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-                        Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
                     </div>
                 </div>
             </div>

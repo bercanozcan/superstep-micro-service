@@ -51,6 +51,15 @@ class AuthController extends Controller
         ]);
     }
 
+    public function loginPost(Request $request)
+    {
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+            return redirect()->route('dashboard');
+        }
+
+        return redirect()->route('welcome');
+    }
+
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();
@@ -59,6 +68,13 @@ class AuthController extends Controller
             'message' => 'Çıkış yapıldı',
             'data' => []
         ]);
+    }
+
+    public function logoutPost(Request $request)
+    {
+        auth()->logout();
+        // redirect to homepage
+        return redirect('/');
     }
 
     public function user(Request $request)
